@@ -16,26 +16,18 @@ style.textContent = `
         box-sizing:border-box;
     }
     
-    body{
-        display:flex;
-        flex-direction: column;
-    }
-    
     header, footer{
         background-color:blue;
         height: 15vh;
         
     }
-    header{
-        margin-bottom: 1.5em
-    }
+    
     
     .container{
         display:flex;
         flex-wrap: wrap;
         gap: 2rem;
         height: 70vh;
-        margin-bottom: 1.5em;
         justify-content:center;
         align-content: center;
     }
@@ -47,12 +39,12 @@ style.textContent = `
     .selector-div{
         background-color:blue;
         width:200px;
-        height:500px;
+        height:80%;
     }
     .container__one{
         display:grid; 
         border: 0.001rem solid lightgrey;
-        height:500px; 
+        height:80%; 
         width:500px; 
         grid-template-columns:repeat(${gridSize}, 1fr)
     }
