@@ -19,10 +19,8 @@ style.textContent = `
     header, footer{
         background-color:blue;
         height: 15vh;
-        
     }
-    
-    
+
     .container{
         display:flex;
         flex-wrap: wrap;
@@ -30,22 +28,29 @@ style.textContent = `
         height: 70vh;
         justify-content:center;
         align-content: center;
+        
     }
+
     .clear{
         background-color:white;
-    }.grey-color{
+    }
+    
+    .grey-color{
         background-color:grey;
     }
+
     .selector-div{
         background-color:blue;
         width:200px;
         height:80%;
     }
+
     .container__one{
         display:grid; 
         border: 0.001rem solid lightgrey;
         height:80%; 
         width:500px; 
+        box-shadow: 0 3px 10px rgb(211, 211, 211);
         grid-template-columns:repeat(${gridSize}, 1fr)
     }
 `;
