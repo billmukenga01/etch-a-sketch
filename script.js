@@ -1,23 +1,30 @@
 const container = document.querySelector('.container');
 const head = document.querySelector('head');
 const body = document.querySelector('body');
+const header = document.querySelector('header');
+//
+
 const style = document.createElement('style');
 const containerOne = document.createElement('div');
 const selectorDiv = document.createElement('div');
 const reset = document.createElement('button');
 const clear = document.createElement('button');
-const header = document.querySelector('header');
-const heading = document.querySelector('p');
-let gridSize = 40;
+const heading = document.createElement('p');
+
+
+let gridSize = 100;
 
 selectorDiv.setAttribute('class', 'selector-div');
-containerOne.setAttribute('class', 'container__one')
-reset.setAttribute('class', 'button')
-reset.textContent = "Reset"
+containerOne.setAttribute('class', 'container__one');
 //
-clear.setAttribute('class', 'button')
-clear.textContent = "Clear"
-
+reset.textContent = "Reset";
+reset.classList.add('button', 'reset');
+//
+clear.classList.add('button', 'btn__clear');
+clear.textContent = "Clear";
+//
+heading.textContent = "Controls";
+heading.setAttribute('class', 'controls');
 
 style.textContent = `
     *{
@@ -33,6 +40,9 @@ style.textContent = `
     header{
        text-align:center;
        font-size: 5em
+    }
+    .controls{
+        font-size: 2rem;
     }
     .button{
         width:7rem;
@@ -96,5 +106,16 @@ container.addEventListener('mouseover', e =>{
     }
 })
 
+selectorDiv.appendChild(heading);
 selectorDiv.appendChild(clear);
 selectorDiv.appendChild(reset);
+
+//
+const btnReset = document.querySelector('.reset');
+btnReset.addEventListener('click', e => {
+    let grid = document.querySelectorAll('.grid-items');
+    for(let elem of grid){
+        elem.classList.remove('grey-color');
+    }
+})
+ 
