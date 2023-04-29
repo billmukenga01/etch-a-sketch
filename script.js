@@ -125,9 +125,11 @@ btnReset.addEventListener('click', ()=>{
 
         genGrid();
 
+    }else{
+        resetFunc();
+        addGreyClr();
     }
-    resetFunc();
-    addGreyClr();
+    
 })
 
 btnGridSize.addEventListener('click', ()=>{
