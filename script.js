@@ -112,7 +112,19 @@ addGreyClr();
 btnReset.addEventListener('click', ()=>{
     if(gridSize === null){
         gridSize = 100;
+        style.textContent = `
+        .container__one{
+            display:grid; 
+            border: 0.001rem solid lightgrey;
+            height:80%; 
+            width:700px; 
+            box-shadow: 0 3px 10px rgb(211, 211, 211);
+            grid-template-columns:repeat(${gridSize}, 1fr);
+            }
+        `;
+
         genGrid();
+
     }
     resetFunc();
     addGreyClr();
