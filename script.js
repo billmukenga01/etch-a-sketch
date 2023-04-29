@@ -2,6 +2,10 @@ const container = document.querySelector('.container');
 const head = document.querySelector('head');
 const body = document.querySelector('body');
 const header = document.querySelector('header');
+const btnReset = document.querySelector('.reset');
+const btnClear = document.querySelector('.clear');
+
+
 //
 
 const style = document.createElement('style');
@@ -9,7 +13,12 @@ const containerOne = document.createElement('div');
 const selectorDiv = document.createElement('div');
 const reset = document.createElement('button');
 const clear = document.createElement('button');
+const gridSizeBtn = document.createElement('button');
 const heading = document.createElement('p');
+//
+
+let gridSize = 100;
+
 
 
 const resetFunc = ()=>{
@@ -19,19 +28,19 @@ const resetFunc = ()=>{
     }
 };
 
-let gridSize = 100;
 
-selectorDiv.setAttribute('class', 'selector-div');
+
+selectorDiv.setAttribute('class', 'selector__div');
 containerOne.setAttribute('class', 'container__one');
-//
-reset.textContent = "Reset";
-reset.classList.add('button', 'reset');
-//
-clear.classList.add('button', 'btn__clear');
-clear.textContent = "Clear";
-//
-heading.textContent = "Controls";
 heading.setAttribute('class', 'controls');
+reset.classList.add('button', 'btn--reset');
+clear.classList.add('button', 'btn--clear');
+gridSizeBtn.classList.add('button', 'btn--grid-size');
+reset.textContent = "Reset";
+gridSizeBtn.textContent = "Grid Size";
+clear.textContent = "Clear";
+heading.textContent = "Controls";
+header.textContent = "Etch-A-Sketch";
 
 style.textContent = `
     *{
@@ -41,12 +50,12 @@ style.textContent = `
     }
     
     header, footer{
-        background-color:lightgrey;
         height: 10vh;
     }
     header{
-       text-align:center;
-       font-size: 5em
+       text-align: center;
+       font-size: 5em;
+       background-color: lightgrey;
     }
     .controls{
         font-size: 2rem;
@@ -77,7 +86,7 @@ style.textContent = `
         background-color:grey;
     }
 
-    .selector-div{
+    .selector__div{
         display:flex;
         position: relative;
         flex-direction: column;
@@ -99,10 +108,15 @@ style.textContent = `
         grid-template-columns:repeat(${gridSize}, 1fr)
     }
 `;
+//
 container.appendChild(containerOne);
 container.insertBefore(selectorDiv, containerOne);
-header.textContent = "Etch-A-Sketch";
 head.appendChild(style);
+selectorDiv.appendChild(heading);
+selectorDiv.appendChild(gridSizeBtn);
+selectorDiv.appendChild(clear);
+selectorDiv.appendChild(reset);
+//
 
 for (let i = 1; i <= gridSize*gridSize; ++i) {
     const newDiv = document.createElement('div');
@@ -116,19 +130,18 @@ container.addEventListener('mouseover', e =>{
     }
 })
 
-selectorDiv.appendChild(heading);
-selectorDiv.appendChild(clear);
-selectorDiv.appendChild(reset);
+
 
 //
-const btnReset = document.querySelector('.reset');
+
 btnReset.addEventListener('click', e => {
     resetFunc();
 })
 
 
 
-const btnClear = document.querySelector('.clear');
+
 btnClear.addEventListener('click', e=>{
     
 })
+
