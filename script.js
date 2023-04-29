@@ -7,16 +7,17 @@ const containerOne = document.createElement('div');
 const selectorDiv = document.createElement('div');
 const reset = document.createElement('button');
 const clear = document.createElement('button');
-const btnGridSize = document.createElement('button');
+const buttonGridSize = document.createElement('button');
 const heading = document.createElement('p');
 const header = document.querySelector('header');
+const body = document.querySelector('body');
 
 container.appendChild(selectorDiv);
 container.appendChild(containerOne);
 document.head.appendChild(style);
 
 selectorDiv.appendChild(heading);
-selectorDiv.appendChild(btnGridSize);
+selectorDiv.appendChild(buttonGridSize);
 selectorDiv.appendChild(clear);
 selectorDiv.appendChild(reset);
 
@@ -25,17 +26,18 @@ containerOne.setAttribute('class', 'container__one');
 heading.setAttribute('class', 'controls');
 reset.classList.add('btn', 'btn--reset');
 clear.classList.add('btn', 'btn--clear');
-btnGridSize.classList.add('btn', 'btn--grid-size');
+buttonGridSize.classList.add('btn', 'btn--grid-size');
 reset.textContent = "Reset";
-btnGridSize.textContent = "Grid Size";
+buttonGridSize.textContent = "Grid Size";
 clear.textContent = "Clear";
 heading.textContent = "Controls";
 header.textContent = "Etch-A-Sketch";
 
 
-const body = document.querySelector('body');
 const btnReset = document.querySelector('.btn--reset');
 const btnClear = document.querySelector('.btn--clear');
+const btnGridSize = document.querySelector('.btn--grid-size');
+
 
 const resetFunc = () => {
   let grid = document.querySelectorAll('.grid-items');
@@ -45,23 +47,33 @@ const resetFunc = () => {
 };
 
 const genGridSize = () => {
-  const size = prompt("Enter grid size (between 1-100):");
-  if (size && size >= 1 && size <= 100) {
-    gridSize = size;
-    containerOne.innerHTML = '';
-    genGrid();
-    addGreyClr();
-  } else {
-    alert("Please enter a valid size between 1-100!");
+  if (gridSize && gridSize >= 1 && gridSize <= 100) {
+        gridSize = prompt("Enter grid size (between 1-100):");
+        containerOne.innerHTML = '';
+        style.textContent = `
+            .container__one{
+                display:grid; 
+                border: 0.001rem solid lightgrey;
+                height:80%; 
+                width:700px; 
+                box-shadow: 0 3px 10px rgb(211, 211, 211);
+                grid-template-columns:repeat(${gridSize}, 1fr);
+            }
+        `
+        genGrid();
+        addGreyClr();
+    } 
+  else {
+        alert("Please enter a valid size between 1-100!");
   }
 };
 
 const genGrid = () => {
   for (let i = 1; i <= gridSize * gridSize; ++i) {
-    const newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'grid-items');
-    containerOne.appendChild(newDiv);
-  }
+        const newDiv = document.createElement('div');
+        newDiv.setAttribute('class', 'grid-items');
+        containerOne.appendChild(newDiv);
+    }
 };
 
 const addGreyClr = ()=>{
@@ -82,69 +94,13 @@ const removeGreyClr = ()=>{
 
 
 style.textContent = `
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-    }
-    
-    header, footer{
-        height: 10vh;
-    }
-    header{
-       text-align: center;
-       font-size: 5em;
-       background-color: lightgrey;
-    }
-    .controls{
-        font-size: 2rem;
-        position: absolute;
-        top: 0;
-    }
-    .btn{
-        width:7rem;
-        height:3rem;
-        font: "times-new-roman"
-
-    }
-    .container{
-        display:flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        height: 80vh;
-        justify-content:center;
-        align-content: center;
-        
-    }
-
-    .clear{
-        background-color:white;
-    }
-    
-    .grey-color{
-        background-color:grey;
-    }
-
-    .selector__div{
-        display:flex;
-        position: relative;
-        flex-direction: column;
-        align-items: center;
-        justify-content:center;
-        gap: 1rem;
-        border-radius:5px;
-        box-shadow:0 3px 10px rgb(211, 211, 211);
-        width:200px;
-        height:80%;
-    }
-
     .container__one{
         display:grid; 
         border: 0.001rem solid lightgrey;
         height:80%; 
         width:700px; 
         box-shadow: 0 3px 10px rgb(211, 211, 211);
-        grid-template-columns:repeat(${gridSize}, 1fr)
+        grid-template-columns:repeat(${gridSize}, 1fr);
     }
 `;
 //
