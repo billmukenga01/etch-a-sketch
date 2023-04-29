@@ -110,6 +110,7 @@ genGrid();
 addGreyClr();
 
 btnReset.addEventListener('click', ()=>{
+    gridSize = 100;
     resetFunc();
     addGreyClr();
 })
