@@ -12,6 +12,13 @@ const clear = document.createElement('button');
 const heading = document.createElement('p');
 
 
+const resetFunc = ()=>{
+    let grid = document.querySelectorAll('.grid-items');
+    for(let elem of grid){
+        elem.classList.remove('grey-color');
+    }
+};
+
 let gridSize = 100;
 
 selectorDiv.setAttribute('class', 'selector-div');
@@ -43,6 +50,8 @@ style.textContent = `
     }
     .controls{
         font-size: 2rem;
+        position: absolute;
+        top: 0;
     }
     .button{
         width:7rem;
@@ -70,6 +79,7 @@ style.textContent = `
 
     .selector-div{
         display:flex;
+        position: relative;
         flex-direction: column;
         align-items: center;
         justify-content:center;
@@ -91,7 +101,7 @@ style.textContent = `
 `;
 container.appendChild(containerOne);
 container.insertBefore(selectorDiv, containerOne);
-header.textContent = "Etch-A-Sketch"
+header.textContent = "Etch-A-Sketch";
 head.appendChild(style);
 
 for (let i = 1; i <= gridSize*gridSize; ++i) {
@@ -113,9 +123,12 @@ selectorDiv.appendChild(reset);
 //
 const btnReset = document.querySelector('.reset');
 btnReset.addEventListener('click', e => {
-    let grid = document.querySelectorAll('.grid-items');
-    for(let elem of grid){
-        elem.classList.remove('grey-color');
-    }
+    resetFunc();
 })
- 
+
+
+
+const btnClear = document.querySelector('.clear');
+btnClear.addEventListener('click', e=>{
+    
+})
