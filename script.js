@@ -1,46 +1,85 @@
-const container = document.querySelector('.container');
-const head = document.querySelector('head');
-const body = document.querySelector('body');
-const header = document.querySelector('header');
-const btnReset = document.querySelector('.reset');
-const btnClear = document.querySelector('.clear');
 
-
-//
+let gridSize = 100;
 
 const style = document.createElement('style');
+const container = document.querySelector('.container');
 const containerOne = document.createElement('div');
 const selectorDiv = document.createElement('div');
 const reset = document.createElement('button');
 const clear = document.createElement('button');
-const gridSizeBtn = document.createElement('button');
+const btnGridSize = document.createElement('button');
 const heading = document.createElement('p');
-//
+const header = document.querySelector('header');
 
-let gridSize = 100;
+container.appendChild(selectorDiv);
+container.appendChild(containerOne);
+document.head.appendChild(style);
 
-
-
-const resetFunc = ()=>{
-    let grid = document.querySelectorAll('.grid-items');
-    for(let elem of grid){
-        elem.classList.remove('grey-color');
-    }
-};
-
-
+selectorDiv.appendChild(heading);
+selectorDiv.appendChild(btnGridSize);
+selectorDiv.appendChild(clear);
+selectorDiv.appendChild(reset);
 
 selectorDiv.setAttribute('class', 'selector__div');
 containerOne.setAttribute('class', 'container__one');
 heading.setAttribute('class', 'controls');
-reset.classList.add('button', 'btn--reset');
-clear.classList.add('button', 'btn--clear');
-gridSizeBtn.classList.add('button', 'btn--grid-size');
+reset.classList.add('btn', 'btn--reset');
+clear.classList.add('btn', 'btn--clear');
+btnGridSize.classList.add('btn', 'btn--grid-size');
 reset.textContent = "Reset";
-gridSizeBtn.textContent = "Grid Size";
+btnGridSize.textContent = "Grid Size";
 clear.textContent = "Clear";
 heading.textContent = "Controls";
 header.textContent = "Etch-A-Sketch";
+
+
+const body = document.querySelector('body');
+const btnReset = document.querySelector('.btn--reset');
+const btnClear = document.querySelector('.btn--clear');
+
+const resetFunc = () => {
+  let grid = document.querySelectorAll('.grid-items');
+  for (let elem of grid) {
+    elem.classList.remove('grey-color');
+  }
+};
+
+const genGridSize = () => {
+  const size = prompt("Enter grid size (between 1-100):");
+  if (size && size >= 1 && size <= 100) {
+    gridSize = size;
+    containerOne.innerHTML = '';
+    genGrid();
+    addGreyClr();
+  } else {
+    alert("Please enter a valid size between 1-100!");
+  }
+};
+
+const genGrid = () => {
+  for (let i = 1; i <= gridSize * gridSize; ++i) {
+    const newDiv = document.createElement('div');
+    newDiv.setAttribute('class', 'grid-items');
+    containerOne.appendChild(newDiv);
+  }
+};
+
+const addGreyClr = ()=>{
+    container.addEventListener('mouseover', e =>{
+        if(e.target.classList.contains('grid-items')){
+            e.target.classList.add('grey-color');
+        }
+    })
+}
+
+const removeGreyClr = ()=>{
+    container.addEventListener('mouseover', e =>{
+        if(e.target.classList.contains('grid-items')){
+            e.target.classList.remove('grey-color');
+        }
+    })
+}
+
 
 style.textContent = `
     *{
@@ -62,7 +101,7 @@ style.textContent = `
         position: absolute;
         top: 0;
     }
-    .button{
+    .btn{
         width:7rem;
         height:3rem;
         font: "times-new-roman"
@@ -109,39 +148,25 @@ style.textContent = `
     }
 `;
 //
-container.appendChild(containerOne);
-container.insertBefore(selectorDiv, containerOne);
-head.appendChild(style);
-selectorDiv.appendChild(heading);
-selectorDiv.appendChild(gridSizeBtn);
-selectorDiv.appendChild(clear);
-selectorDiv.appendChild(reset);
-//
-
-for (let i = 1; i <= gridSize*gridSize; ++i) {
-    const newDiv = document.createElement('div');
-    newDiv.setAttribute('class', 'grid-items');
-    containerOne.appendChild(newDiv);
-}
-
-container.addEventListener('mouseover', e =>{
-    if(e.target.classList.contains('grid-items')){
-        e.target.classList.add('grey-color');
-    }
-})
 
 
+genGrid();
+addGreyClr();
 
-//
-
-btnReset.addEventListener('click', e => {
+btnReset.addEventListener('click', ()=>{
     resetFunc();
+    addGreyClr();
+})
+
+btnGridSize.addEventListener('click', ()=>{
+    genGridSize();
+})
+
+btnClear.addEventListener('click', ()=>{
+    removeGreyClr();
 })
 
 
 
 
-btnClear.addEventListener('click', e=>{
-    
-})
 
